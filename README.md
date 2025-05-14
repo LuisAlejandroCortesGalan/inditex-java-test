@@ -49,9 +49,22 @@ Expected response:
 [2, 3, 4]
 ```
 
-### 4. Run your Spring Boot application (on port 5000)
+### 4. Clone and run this Spring Boot project
 
-Ensure your application is running at:
+Open a new terminal and clone this repository:
+
+```bash
+git clone https://github.com/LuisAlejandroCortesGalan/inditex-java-test.git
+cd inditex-backend
+```
+
+Ensure port `5000` is available, then run the application with your preferred IDE or using Maven:
+
+```bash
+./mvnw spring-boot:run
+```
+
+Once the application is running, the endpoint will be available at:
 
 ```text
 http://localhost:5000/product/{id}/similar
@@ -65,6 +78,8 @@ curl http://localhost:5000/product/1/similar
 
 ### 5. Execute performance test with k6
 
+Return to the `backendDevTest` folder and run:
+
 ```bash
 docker-compose run --rm k6 run /scripts/test.js
 ```
@@ -77,35 +92,9 @@ Open the following URL in your browser:
 http://localhost:3000/d/Le2Ku9NMk/k6-performance-test
 ```
 
-## ✅ Example Response
-
-```json
-[
-  {
-    "id": "2",
-    "name": "Dress",
-    "price": 19.99,
-    "availability": true
-  },
-  {
-    "id": "3",
-    "name": "Blazer",
-    "price": 29.99,
-    "availability": false
-  },
-  {
-    "id": "4",
-    "name": "Boots",
-    "price": 39.99,
-    "availability": true
-  }
-]
-```
-
 ## 👨‍💻 Author
 
 **Alejandro Cortés Galán**  
-Junior Full Stack Developer  
+Full Stack Developer  
 [LinkedIn](https://www.linkedin.com/)  
 [Portfolio](https://miportafolio-alpha.vercel.app/)  
-wincho_04@hotmail.com
