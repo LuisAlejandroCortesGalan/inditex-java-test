@@ -6,7 +6,7 @@ public class Product {
     private Double price;
     private Boolean availability;
 
-    public Product() {} // <- Constructor vacío requerido
+    public Product() {}
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }

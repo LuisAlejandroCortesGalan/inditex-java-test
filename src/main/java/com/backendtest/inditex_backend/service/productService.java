@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class productService {
+public class ProductService {
 
-    private static final Logger logger = LoggerFactory.getLogger(productService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     private final WebClient webClient;
 
-    public productService() {
+    public ProductService() {
         this.webClient = WebClient.builder()
                 .baseUrl("http://simulado")
                 .build();
