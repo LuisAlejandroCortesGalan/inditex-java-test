@@ -60,7 +60,7 @@ docker-compose run --rm k6 run /scripts/test.js
 
 ## 🧭 System Architecture Diagram
 
-![API Flow](./A_flowchart_diagram_illustrates_a_Product_Similari.png)
+You can see the complete flux diagram here [docs/Diagrama de flujo API Product Similarity](./docs/Diagrama%20de%20flujo%20API%20Product%20Similarity.png).
 
 ---
 
@@ -71,6 +71,7 @@ docker-compose run --rm k6 run /scripts/test.js
 - Externalize environment variables via `application.yml` or system envs
 - Dockerize the application for full portability (✅ done)
 - Add OpenAPI/Swagger for endpoint documentation
+- Migrate to a fully reactive stack using Spring WebFlux (if a non-blocking architecture is required)
 
 ---
 
