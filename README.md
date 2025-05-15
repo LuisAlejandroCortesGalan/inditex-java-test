@@ -60,7 +60,7 @@ docker-compose run --rm k6 run /scripts/test.js
 
 ## 🧭 System Architecture Diagram
 
-![API Flow](./A_flowchart_diagram_illustrates_a_Product_Similari.png)
+![API Flow](./docs/Diagrama%20de%20flujo%20API%20Product%20Similarity.png)
 
 ---
 
