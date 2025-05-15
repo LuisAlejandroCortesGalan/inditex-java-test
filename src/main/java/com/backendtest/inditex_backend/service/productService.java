@@ -1,34 +1,37 @@
 package com.backendtest.inditex_backend.service;
 
-
 import com.backendtest.inditex_backend.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 @Service
 public class productService {
 
     private static final Logger logger = LoggerFactory.getLogger(productService.class);
-private static final String BASE_URL = "http://simulado/product/";
+    private final WebClient webClient;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    public productService() {
+        this.webClient = WebClient.builder()
+                .baseUrl("http://simulado")
+                .build();
+    }
 
     public List<Product> getSimilarProducts(String productId) {
         List<Product> similarProducts = new ArrayList<>();
 
         try {
             logger.info("Fetching similar product IDs for product {}", productId);
-            ResponseEntity<String[]> response = restTemplate.getForEntity(BASE_URL + productId + "/similarids", String[].class);
-            String[] similarIds = response.getBody();
+            String[] similarIds = webClient.get()
+                    .uri("/product/{id}/similarids", productId)
+                    .retrieve()
+                    .bodyToMono(String[].class)
+                    .block();
 
             if (similarIds == null || similarIds.length == 0) {
                 logger.warn("No similar products found for product {}", productId);
@@ -37,19 +40,24 @@ private static final String BASE_URL = "http://simulado/product/";
 
             for (String id : similarIds) {
                 try {
-                    Product product = restTemplate.getForObject(BASE_URL + id, Product.class);
+                    Product product = webClient.get()
+                            .uri("/product/{id}", id)
+                            .retrieve()
+                            .bodyToMono(Product.class)
+                            .block();
+
                     if (product != null) {
                         similarProducts.add(product);
                         logger.debug("Added similar product: {}", product.getId());
                     }
-                } catch (HttpClientErrorException ex) {
+                } catch (WebClientResponseException ex) {
                     logger.warn("Could not fetch product {}. Status: {}", id, ex.getStatusCode());
                 }
             }
 
-        } catch (HttpClientErrorException ex) {
+        } catch (WebClientResponseException ex) {
             logger.error("Failed to fetch similar IDs for product {}. Status: {}", productId, ex.getStatusCode());
-            throw ex; 
+            throw ex;
         }
 
         return similarProducts;
