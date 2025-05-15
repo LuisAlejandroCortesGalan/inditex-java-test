@@ -1,12 +1,13 @@
 package com.backendtest.inditex_backend.model;
 
-public class product {
+public class Product {
     private String id;
     private String name;
     private Double price;
     private Boolean availability;
 
-    // Getters y Setters
+    public Product() {} // <- Constructor vacío requerido
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
