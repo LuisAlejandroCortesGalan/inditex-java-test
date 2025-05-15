@@ -1,10 +1,30 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Created by Alejandro Cortés Galán
 
-### STS ###
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Java build output
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven wrapper
+!.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Spring Tool Suite (STS)
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +33,21 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+
+# Visual Studio Code
+.vscode/
+
+# Allow build folders inside source directories if needed
 !**/src/main/**/build/
 !**/src/test/**/build/
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-### VS Code ###
-.vscode/
+# Other
+HELP.md

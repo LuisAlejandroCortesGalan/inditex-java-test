@@ -1,100 +1,82 @@
-# Product Similarity API
+# 🧠 Product Similarity API
 
-This project is part of a backend technical assessment. It provides a REST API built with Spring Boot that retrieves similar products for a given product ID by consuming external mock services.
+A backend technical assessment project built with **Spring Boot**. This REST API retrieves similar products for a given product ID by consuming external mock services.
+
+---
 
 ## 🚀 Features
 
 - Exposes a single endpoint:  
   `GET /product/{productId}/similar`
-- Internally calls:
-  - `/product/{productId}/similarids` to fetch similar product IDs
-  - `/product/{id}` for each similar product to fetch its details
-- Returns a JSON array with full details of similar products
+- Fetches:
+  - Similar product IDs from `/product/{productId}/similarids`
+  - Product details from `/product/{id}` for each ID
+- Returns a structured JSON array with full product details
 
-## 🛠️ Tech Stack
+---
+
+## ⚙️ Tech Stack
 
 - Java 17  
 - Spring Boot  
-- RestTemplate  
+- WebClient (reactive HTTP client)  
 - Docker & Docker Compose  
 - k6 (load testing)  
-- Grafana (visual reporting)
+- Grafana (performance visualization)
 
-## 🧪 How to Run Tests
+---
 
-Ensure Docker is installed and running on your system.
+## 🐳 Run the Full Environment with Docker
 
-### 1. Clone the test environment
+> ✅ **Note**: No need to install Java or Maven locally. Everything runs via Docker.
 
-```bash
-git clone https://github.com/dalogax/backendDevTest.git
-cd backendDevTest
-```
-
-### 2. Start mock services and test infrastructure
-
-```bash
-docker-compose up -d simulado influxdb grafana
-```
-
-### 3. Verify the mocks are working
-
-```bash
-curl http://localhost:3001/product/1/similarids
-```
-
-Expected response:
-
-```json
-[2, 3, 4]
-```
-
-### 4. Clone and run this Spring Boot project
-
-Open a new terminal and clone this repository:
+### 1. Clone this repository
 
 ```bash
 git clone https://github.com/LuisAlejandroCortesGalan/inditex-java-test.git
-cd inditex-backend
+cd inditex-java-test
 ```
 
-Ensure port `5000` is available, then run the application with your preferred IDE or using Maven:
+### 2. Build and start the environment
 
 ```bash
-./mvnw spring-boot:run
+docker-compose build
+docker-compose up -d
 ```
 
-Once the application is running, the endpoint will be available at:
+### 3. Access the services
 
-```text
-http://localhost:5000/product/{id}/similar
-```
+- API: [http://localhost:5000](http://localhost:5000)
+- Mocks: [http://localhost:3001](http://localhost:3001)
+- Grafana Dashboard: [http://localhost:3000](http://localhost:3000)
 
-Test it with:
-
-```bash
-curl http://localhost:5000/product/1/similar
-```
-
-### 5. Execute performance test with k6
-
-Return to the `backendDevTest` folder and run:
+### 4. Run performance tests
 
 ```bash
 docker-compose run --rm k6 run /scripts/test.js
 ```
 
-### 6. View test results in Grafana
+---
 
-Open the following URL in your browser:
+## 🧭 System Architecture Diagram
 
-```text
-http://localhost:3000/d/Le2Ku9NMk/k6-performance-test
-```
+![API Flow](./A_flowchart_diagram_illustrates_a_Product_Similari.png)
+
+---
+
+## 🚧 Future Improvements
+
+- Add unit and integration testing (JUnit + Mockito)
+- Improve resilience with retry/fallback using Resilience4j
+- Externalize environment variables via `application.yml` or system envs
+- Dockerize the application for full portability (✅ done)
+- Add OpenAPI/Swagger for endpoint documentation
+
+---
 
 ## 👨‍💻 Author
 
 **Alejandro Cortés Galán**  
 Full Stack Developer  
-[LinkedIn](https://www.linkedin.com/)  
-[Portfolio](https://miportafolio-alpha.vercel.app/)  
+🔗 [LinkedIn](https://www.linkedin.com/)  
+🌐 [Portfolio](https://miportafolio-alpha.vercel.app/)  

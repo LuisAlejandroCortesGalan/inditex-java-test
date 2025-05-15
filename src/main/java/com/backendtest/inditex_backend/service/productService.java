@@ -1,7 +1,7 @@
 package com.backendtest.inditex_backend.service;
 
 
-import com.backendtest.inditex_backend.model.product;
+import com.backendtest.inditex_backend.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +18,12 @@ import java.util.List;
 public class productService {
 
     private static final Logger logger = LoggerFactory.getLogger(productService.class);
-    private static final String BASE_URL = "http://localhost:3001/product/";
+private static final String BASE_URL = "http://simulado/product/";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public List<product> getSimilarProducts(String productId) {
-        List<product> similarProducts = new ArrayList<>();
+    public List<Product> getSimilarProducts(String productId) {
+        List<Product> similarProducts = new ArrayList<>();
 
         try {
             logger.info("Fetching similar product IDs for product {}", productId);
@@ -37,7 +37,7 @@ public class productService {
 
             for (String id : similarIds) {
                 try {
-                    product product = restTemplate.getForObject(BASE_URL + id, product.class);
+                    Product product = restTemplate.getForObject(BASE_URL + id, Product.class);
                     if (product != null) {
                         similarProducts.add(product);
                         logger.debug("Added similar product: {}", product.getId());
